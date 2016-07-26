@@ -103,9 +103,14 @@ AActor* USCarryObjectComponent::GetActorInView()
 	FHitResult Hit(ForceInit);
 	GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, TraceParams);
 
-	//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f);
+	/* Check to see if we hit a staticmesh component that has physics simulation enabled */
+	UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(Hit.GetComponent());
+	if (MeshComp && MeshComp->IsSimulatingPhysics())
+	{
+		return Hit.GetActor();
+	}
 
-	return Hit.GetActor();
+	return nullptr;
 }
 
 
@@ -218,7 +223,7 @@ void USCarryObjectComponent::OnPickupMulticast_Implementation(AActor* FocusActor
 			MeshComp->SetSimulatePhysics(false);
 		}
 
-		FocusActor->AttachRootComponentTo(this, NAME_None, EAttachLocation::KeepWorldPosition);
+		FocusActor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 
@@ -236,7 +241,7 @@ void USCarryObjectComponent::OnDropMulticast_Implementation()
 			MeshComp->SetSimulatePhysics(true);
 		}
 
-		CarriedActor->GetRootComponent()->DetachFromParent(true);
+		CarriedActor->GetRootComponent()->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 	}
 }
 

@@ -1,13 +1,21 @@
 Epic Survival Game Series
 -------------------------
 
-Third person survival game (tutorial) series for Unreal Engine 4.
-
-Consists of 6 sections, published every two weeks between March and June.
+Third-person survival game for Unreal Engine 4 made entirely in C++. Originally built as a 6 section tutorial series, now available as open-source C++ sample project.
 
 See [the main documentation page on the unreal engine Wiki](https://wiki.unrealengine.com/Survival_sample_game).
 
 For questions & feedback visit [the official thread on the unreal engine forums](https://forums.unrealengine.com/showthread.php?63678-Upcoming-C-Gameplay-Example-Series-Making-a-Survival-Game)
+
+**Last updated for 4.12!**
+
+### NEW: Mod Support
+Includes two small mod examples including a Pink Rifle extension and Flashlight replacement mod. [Check out the Modding Sample Project for guidelines & cooker profile setup](https://wiki.unrealengine.com/Modding:_Adding_mod-support_to_your_Unreal_Engine_4_project)
+
+Example commandline arg to load the Mod gamemode with the built-in level "CoopLandscape" in a cooked game build:
+SurvivalGame.exe /Game/Maps/CoopLandscape_Map?game=/ExtendedRifleMod/SurvivalGameMode_PinkRifle.SurvivalGameMode_PinkRifle_C
+
+There is currently no supporting UI to load up specific mod content, please note that the modding pipeline is a experimental and intended for early adopters only!
 
 ### Section 1
 This section sets up the third person character movement with animation, object interaction, simple hunger system, all with networking support.
